@@ -41,9 +41,10 @@ def get_internal(news, start_item, end_item):
 
 def get_clean_string_from_news(news):
     author = news["author"]
-    splitted_summary = news["summary"].split(" - ")
-    argument = splitted_summary[0]
-    real_summary = "" if len(splitted_summary) == 1 else splitted_summary[1]
+    splitted_summary = news["summary"].replace("–", "-").split(" - ")
+    argument = splitted_summary[0] if len(splitted_summary) > 1 else "NEWS"
+    real_summary = splitted_summary[0] if len(
+        splitted_summary) == 1 else splitted_summary[1]
 
     utterance = "{0}, di {1}. {2}. {3}. ".format(
         argument, author, news["title"], real_summary
@@ -51,6 +52,9 @@ def get_clean_string_from_news(news):
 
     for char in ["«", "»", "“", "”"]:
         utterance = utterance.replace(char, "\"")
+    for char in ["’"]:
+        utterance = utterance.replace(char, "'")
+
     utterance = utterance.replace("(Foto/Video)", "")
     utterance = utterance.replace("A'", "à")
     utterance = utterance.replace("E'", "è")
@@ -63,9 +67,9 @@ def get_clean_string_from_news(news):
     return utterance.strip()
 
 
-for n in get_latest_news(0, "camerino"):
-    print(n)
-    print("===")
+# for n in get_latest_news(0, "camerino"):
+#     print(n)
+#     print("===")
 
 
 # feed = feedparser.parse('https://www.cronachemaceratesi.it/feed/')

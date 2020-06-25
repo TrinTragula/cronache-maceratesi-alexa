@@ -19,15 +19,15 @@ NEWS_PAGE_KEY = "NEWS_PAGE_NUMBER"
 CATEGORY_KEY = "NEWS_CATEGORY"
 
 SENTENCES = {
-    "launch": "Ciao, chiedimi di dirti le ultime notizie!",
+    "launch": "Ciao, chiedimi di leggerti le ultime notizie!",
     "invite_to_ask_more": "Chiedimi di nuovo le ultime notizie o notizie su di un particolare argomento.",
     "no_news": "Non ho trovato nuove notizie.",
     "no_news_on_category": "Non ho trovato notizie relative a questo argomento.",
     "no_more_news": "Non ho trovato altre notizie.",
-    "help": "Chiedimi le ultime notizie e ti leggerò gli ultimi articoli pubblicati da Cronache Maceratesi. Puoi anche chiedere le ultime notizie per la tua città. Prova a chiedere le ultime notizie su 'Camerino'",
+    "help": "Chiedimi le ultime notizie e ti leggerò gli ultimi articoli pubblicati su Cronache Maceratesi. Puoi anche chiedere le ultime notizie per la tua città. Prova a chiedere 'Alexa, dimmi le ultime notizie su Camerino'",
     "stop": "A presto!",
     "exception": "Scusa, non ho capito, puoi ripetere?",
-    "more": "Vuoi che legga altre notizie?",
+    "more": "Vuoi che continui a leggere altre notizie?",
     "pause": "<break time='1s'/> "
 }
 
@@ -48,7 +48,7 @@ def get_answer(news, category=None, is_more=False):
     else:
         incipit = "Ecco le ultime notizie"
         if category is not None:
-            incipit += "su {}".format(category)
+            incipit += " su {}".format(category)
 
     news_string = SENTENCES["pause"].join(news)
 
@@ -172,7 +172,7 @@ class YesIntentHandler(AbstractRequestHandler):
         category = get_category_from_session(handler_input)
 
         news = get_latest_news(current_page, category)
-        speak_output = get_answer(news, category)
+        speak_output = get_answer(news, category, True)
 
         handler_input.attributes_manager.session_attributes[NEWS_PAGE_KEY] = current_page + 1
         handler_input.attributes_manager.session_attributes[CATEGORY_KEY] = category
