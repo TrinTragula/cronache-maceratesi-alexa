@@ -49,10 +49,11 @@ def get_answer(news, category=None, is_more=False):
         incipit = "Ecco le ultime notizie"
         if category is not None:
             incipit += " su {}".format(category)
+        incipit += ". "
 
     news_string = SENTENCES["pause"].join(news)
 
-    return "{}. {}  <break time='1s'/> {}".format(incipit, news_string, SENTENCES["more"])
+    return "{}{}  <break time='1s'/> {}".format(incipit, news_string, SENTENCES["more"])
 
 
 def reset_all(handler_input):
