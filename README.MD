@@ -1,4 +1,4 @@
-# Skill per Cronache Maceratesi
+# Skill per lettura notizie del sito web Cronache Maceratesi
 
 Una skill di Alexa per leggere le ultime notizie pubblicate dal sito [Cronache Maceratesi](https://www.cronachemaceratesi.it/) e pubblicate sul loro [feed RSS pubblico](https://www.cronachemaceratesi.it/feed/).
 
